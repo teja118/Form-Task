@@ -1,0 +1,33 @@
+
+.body {
+    font-family: 'Poppins';
+}
+.fle{
+    border-radius: 2px;
+    background-color: #1c74b1;
+    border: solid 1px #1c74b1;
+    box-shadow: none;
+    font-size: 14px;
+    padding: 15px 35px;
+    color: #fff;
+}
+.lgin{
+    width: 170px;
+     background-color: #1c74b1;
+    border-color: #1c74b1;
+}
+.crnew{
+    width: 170px;
+    background-color: #28af47;
+    border-color: #28af47;
+}
+.frm{
+    top: 0px;
+left: 0px;
+width: 1920px;
+height: 2590px;
+background: #EBFAFF 0% 0% no-repeat padding-box;
+border: 1px solid #707070;
+opacity: 1;
+text-align: center
+}

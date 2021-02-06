@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body class="body">
+  <br> <br>
+
+    <!-- Customer Form -->
+<div class="container frm">
+    <br> 
+    <div class="row">
+      <div class="col-md-2"></div>
+       <div class="col-md-8" >
+        <h4 style="color: #1783bb; font-weight: 600;
+        font-size: 19px;">Customer Registration Form</h4>
+        <br> 
+        <form [formGroup]="loginForm"  (ngSubmit)="onSubmit(loginForm.value)" >
+          <div style="background: white; padding: 30px;">
+      
+          <div class="row">
+            <div class="col-md-4">
+              <h6>Customer Name</h6>
+            </div>
+            <div class="col-md-8">
+              <div class="form-group">
+                <input type="text" formControlName="cusname" class="form-control" placeholder="Enter Customer Name"   [ngClass]="{ 'is-invalid': submitted && f.cusname.errors }" [(ngModel)]="cus_name" required >
+                <div *ngIf="submitted && f.cusname.errors" class="invalid-feedback">
+                    <div *ngIf="f.cusname.errors.required">Customer Name is required</div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <h6>Email</h6>
+            </div>
+            <div class="col-md-8">
+              <div class="form-group">
+                <input type="text" formControlName="email" class="form-control" placeholder="Enter Email Address"   [ngClass]="{ 'is-invalid': submitted && f.email.errors }" [(ngModel)]="cus_mail" required >
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <h6>Phone Number</h6>
+            </div>
+            <div class="col-md-8">
+              <div class="form-group">
+                <input type="text" formControlName="phn" class="form-control" placeholder="Enter Phone Number"   [ngClass]="{ 'is-invalid': submitted && f.phn.errors }" [(ngModel)]="cus_phn" required >
+                <div *ngIf="submitted && f.phn.errors" class="invalid-feedback">
+                    <div *ngIf="f.phn.errors.required">Phone Number is required</div>
+                    <div *ngIf="f.phn.errors.minlength">Phone Number must be  10 numbers</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <h6>Password</h6>
+            </div>
+            <div class="col-md-8">
+              <div class="form-group">
+                <input type="password" formControlName="password" class="form-control" placeholder="Enter Password"   [ngClass]="{ 'is-invalid': submitted && f.password.errors }" [(ngModel)]="cus_psw" required/>
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <h6>Confirm Password</h6>
+            </div>
+            <div class="col-md-8">
+              <div class="form-group">
+                <input type="password" formControlName="cnfrmpsw" class="form-control" placeholder="Enter Confirm Password"   [ngClass]="{ 'is-invalid': submitted && f.cnfrmpsw.errors }" [(ngModel)]="cus_cnfrm_psw" required >
+                <div *ngIf="submitted && f.cnfrmpsw.errors" class="invalid-feedback">
+                    <div *ngIf="f.cnfrmpsw.errors.required">Confirm Password is required</div>
+                    <div *ngIf="f.cnfrmpsw.errors.confirmedValidator">Password and Confirm Password must be match.</div>
+                    
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+    <br> <br>
+
+
+ <!-- Branch Form -->
+    <div formArrayName="branch_form">
+      <div *ngFor="let item of loginForm.get('branch_form').controls;  let i = index" >
+      <div [formGroupName]="i">
+     
+     <div style="background: white; padding: 30px;">
+      <h4 style="color: #1783bb; font-weight: 600;
+      font-size: 19px;">Branch Details</h4>
+      <br> <br>
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Branch Name {{i+1}}</h6>
+        </div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <input type="text" formControlName="brname" class="form-control" placeholder="Enter Branch Name"  [ngClass]="{ 'is-invalid': submitted && branch_form.controls[i].get('brname').errors?.required }"    required >
+          
+            <div *ngIf=" submitted && branch_form.controls[i].get('brname').errors?.required" class="invalid-feedback">
+                <div *ngIf="branch_form.controls[i].get('brname').errors?.required">Branch Name is required</div>
+               
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Email</h6>
+        </div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <input type="text" formControlName="bremail" class="form-control" placeholder="Enter Email Address"   [ngClass]="{ 'is-invalid': submitted && branch_form.controls[i].get('bremail').errors?.required }"  required >
+            <div *ngIf="submitted && branch_form.controls[i].get('bremail').errors" class="invalid-feedback">
+                <div *ngIf="branch_form.controls[i].get('bremail').errors?.required">Branch Email is required</div>
+                <div *ngIf="branch_form.controls[i].get('bremail').errors?.email">Branch Email must be a valid email address</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Phone Number</h6>
+        </div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <input type="text" formControlName="brphn" class="form-control" placeholder="Enter Phone Number"   [ngClass]="{ 'is-invalid': submitted && branch_form.controls[i].get('brphn').errors?.required }" required >
+            <div *ngIf="submitted && branch_form.controls[i].get('brphn').errors" class="invalid-feedback">
+                <div *ngIf="branch_form.controls[i].get('brphn').errors?.required">Branch Phone is required</div>
+                <div *ngIf="branch_form.controls[i].get('brphn').errors?.minlength">Phone Number must be  10 numbers</div>
+               
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Branch City</h6>
+        </div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <input type="text" formControlName="city" class="form-control" placeholder="Enter Branch City"   [ngClass]="{ 'is-invalid': submitted && branch_form.controls[i].get('city').errors?.required }"  required >
+            <div *ngIf="submitted && branch_form.controls[i].get('city').errors" class="invalid-feedback">
+                <div *ngIf="branch_form.controls[i].get('city').errors?.required">City is required</div>
+            
+            </div>
+        </div>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Branch Address</h6>
+        </div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <input type="text" formControlName="adrs" class="form-control" placeholder="Enter Branch Address"   [ngClass]="{ 'is-invalid': submitted &&  branch_form.controls[i].get('adrs').errors?.required }"  required >
+            <div *ngIf="submitted && branch_form.controls[i].get('adrs').errors?.required" class="invalid-feedback">
+                <div *ngIf="branch_form.controls[i].get('adrs').errors?.required">Branch Address is required</div>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4"> 
+        <h6>Branch Type</h6>
+      </div>
+        <div class="col-md-8">
+          <div class="row">
+          
+
+          <div class="custom-control custom-radio">
+            <input type="radio" id="gender_{{i}}" formControlName="type" value="Main Branch" [ngClass]="{ 'is-invalid': submitted && branch_form.controls[i].get('type').errors?.required }"  required >Main Branch
+             <input type="radio" id="gender_{{i}}" formControlName="type" value="Sub Branch">Sub Branch
+          </div> 
+
+          <div *ngIf="submitted && branch_form.controls[i].get('type').errors?.required" class="invalid-feedback">
+            <div *ngIf="branch_form.controls[i].get('type').errors?.required">Branch Type is required</div>
+          </div>
+
+          </div>
+          </div>
+        </div>
+       <br>
+      <div class="row">
+        <div class="col-md-4"> 
+        <h6>Branch Business</h6>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+
+          <div *ngFor="let data of business">
+            <input type="checkbox" formControlName="acceptTerms"  [ngClass]="{ 'is-invalid': submitted && branch_form.controls[i].get('acceptTerms').errors?.required }" required >
+             {{data.bsn}}<br>
+          </div>
+          <div *ngIf="submitted && branch_form.controls[i].get('acceptTerms').errors?.required" class="invalid-feedback">
+            <div *ngIf="branch_form.controls[i].get('acceptTerms').errors?.required">Branch Business is required</div>
+          </div>
+      
+      </div>
+    </div>
+
+      </div>
+
+
+
+
+      </div>
+
+    </div>
+    </div>
+    <br>
+    <button type="button" class="btn btn-primary lgin" (click)="addSellingPoint()" style="background: #fff;
+    color: #1c74b1;
+    font-weight: 600;"
+    
+    >+Add Branch</button>
+  </div>
+
+
+
+   
+   <br> <br>
+
+  <button type="submit" class="btn btn-primary lgin">Submit</button>
+</form>
+
+<!-- {{ this.loginForm.value | json }} -->
+
+
+
+
+  <br> <br>
+   </div>
+      <div class="col-md-4"></div>
+    </div>
+    
+
+ 
+</div>
+  
+<br> <br> <br>
+</body>
+</html>
+
+
